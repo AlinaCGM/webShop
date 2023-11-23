@@ -4,22 +4,36 @@ from django.db import models
 
 
 class Cart(models.model):
-    """Model representing users cart"""
+    """Model representing a users cart"""
 
-    # A user can have only one cart and a cart can only belong to one user, so the records in the cart table always need a Unique user foreign key
-    # on_delete=models.RESTRICT prevents the carts associated user being deleted if it is referenced by any cart
-    user = models.ForeignKey("User", on_delete=models.RESTRICT, null=False, unique=True)
+    # A User can only have one Cart and a Cart can only belong to one User
+    # When the User referencing the Cart is deleted, the associated Cart will also be deleted
+    user = models.OneToOneField("User", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True, null=False)
 
-    # Can have multiple carditems
+    def get_total(self):
+        pass
 
     def get_absolute_path(self):
+        pass
+
+    def __str__(self):
         pass
 
 
 class CartItem(models.model):
     """Model representing an item in a cart"""
 
-    # Can only have one cart
-    cart = models.ForeignKey("Cart", on_delete=models.RESTRICT, null=False)
+    # A CartItem can have one and only one Cart (not 0 or many), but a Cart can have 0 or many CartItems
+    # When the Cart referencing the CartItem is deleted, the associated CartItem will also be deleted
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=False)
 
-    # Can have multiple instances of a product
+    # A CartItem can have one and only one Product, but a Product can have 0 or many CartItems
+    product = models.ForeignKey("Product", on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def get_absolute_path(self):
+        pass
+
+    def __str__(self):
+        pass
