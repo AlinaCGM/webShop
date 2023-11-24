@@ -7,7 +7,7 @@ from product.models import Product
 from django.urls import reverse
 
 
-class Cart(models.model):
+class Cart(models.Model):
     """Model representing a users cart"""
 
     # A User can only have one Cart and a Cart can only belong to one User
@@ -26,7 +26,7 @@ class Cart(models.model):
         return f"User: {self.user.id} cart"
 
 
-class CartItem(models.model):
+class CartItem(models.Model):
     """Model representing an item in a cart (an item in a cart can actually have its quantity increased by the user)"""
 
     # A CartItem can have one and only one Cart (not 0 or many), but a Cart can have 0 or many CartItems
