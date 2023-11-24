@@ -34,6 +34,8 @@ class CartItem(models.model):
     # A CartItem can have one and only one Product, but a Product can have 0 or many CartItems
     product = models.ForeignKey("Product", on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+    added_to_cart = models.DateTimeField(auto_now_add=True, null=False)
+
 
     def total_price(self):
         # Todo: Update self.product.price according to the actual field name in Product model later
