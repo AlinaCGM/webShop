@@ -2,6 +2,8 @@ from django.db import models
 
 # Create your models here.
 
+from django.urls import reverse
+
 
 class Cart(models.model):
     """Model representing a users cart"""
@@ -11,18 +13,19 @@ class Cart(models.model):
     user = models.OneToOneField("User", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, null=False)
 
-    def get_total(self):
+    def cart_total_price(self):
         pass
 
     def get_absolute_path(self):
-        pass
+        """Return the URL to access a particular cart instance"""
+        return reverse("cart-detail", args=[str(self.id)])
 
     def __str__(self):
-        pass
+        return f"User: {self.user.id} cart"
 
 
 class CartItem(models.model):
-    """Model representing an item in a cart"""
+    """Model representing an item in a cart (an item in a cart can actually have its quantity increased by the user)"""
 
     # A CartItem can have one and only one Cart (not 0 or many), but a Cart can have 0 or many CartItems
     # When the Cart referencing the CartItem is deleted, the associated CartItem will also be deleted
@@ -32,8 +35,13 @@ class CartItem(models.model):
     product = models.ForeignKey("Product", on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
+    def total_price(self):
+        # Todo: Update self.product.price according to the actual field name in Product model later
+        return self.quantity * self.product.price
+
     def get_absolute_path(self):
-        pass
+        return reverse("cartitem-detail", args=[str(self.id)])
 
     def __str__(self):
-        pass
+        # Todo: Update self.product.name according to the actual field name in product model later
+        return f"{self.quantity} x {self.product.name}"
