@@ -36,6 +36,8 @@ class CartItem(models.model):
     quantity = models.PositiveIntegerField(default=1)
     added_to_cart = models.DateTimeField(auto_now_add=True, null=False)
 
+    class Meta:
+        ordering = ["added_to_cart"]
 
     def total_price(self):
         # Todo: Update self.product.price according to the actual field name in Product model later
