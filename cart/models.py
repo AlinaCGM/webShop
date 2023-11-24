@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 from user.models import User_Model
+from product.models import Product
 from django.urls import reverse
 
 
@@ -33,7 +34,7 @@ class CartItem(models.model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=False)
 
     # A CartItem can have one and only one Product, but a Product can have 0 or many CartItems
-    product = models.ForeignKey("Product", on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     added_to_cart = models.DateTimeField(auto_now_add=True, null=False)
 
@@ -41,12 +42,10 @@ class CartItem(models.model):
         ordering = ["added_to_cart"]
 
     def total_price(self):
-        # Todo: Update self.product.price according to the actual field name in Product model later
         return self.quantity * self.product.price
 
     def get_absolute_path(self):
         return reverse("cartitem-detail", args=[str(self.id)])
 
     def __str__(self):
-        # Todo: Update self.product.name according to the actual field name in product model later
-        return f"{self.quantity} x {self.product.name}"
+        return f"{self.quantity} x {self.product.title}"
