@@ -55,7 +55,7 @@ class CartItem(models.Model):
         return self.quantity * self.product.price
 
     def get_absolute_url(self):
-        return reverse("cartitem-detail", args=[str(self.id)])
+        return reverse("cartitem-detail", args=[str(self.cart.id), str(self.id)])
 
     def __str__(self):
         return f"{self.quantity} x {self.product.title}"
