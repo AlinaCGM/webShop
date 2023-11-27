@@ -8,10 +8,10 @@
 </head>
 <body>
     {% block content %}
-    <h1 class="red-text mt-5">Cart</h1>
+    <h1 class="red-text mt-5">Cart Item</h1>
     <ul>
-        <li>This cart belongs to: <strong>{{ cart_user }}</strong></li>
-        <li>It is 1 cart out of a total of <strong>{{ num_carts_total }}</strong></li>
+        <li><strong>Product:</strong> {{ product.title }}</li>
+        <li><strong>Quantity:</strong> {{ quantity }}</li>
     </ul>
     {% endblock %}
 </body>
