@@ -19,6 +19,10 @@ class CartModelTest(TestCase):
         created_at = cart.created_at
         self.assertEqual(created_at, date.today())
 
+    def test_get_absolute_url(self):
+        customer = User.objects.get(id=1)
+        cart = Cart.objects.create(user=customer)
+        self.assertEqual(cart.get_absolute_url(), "/cart/1/")
 
 
 class CartItemModelTest(TestCase):
@@ -33,3 +37,10 @@ class CartItemModelTest(TestCase):
         cartitem = CartItem(cart=cart, product=product)
         quantity = cartitem.quantity
         self.assertEqual(quantity, 1)
+
+    def test_get_absolute_url(self):
+        customer = User.objects.get(id=1)
+        cart = Cart.objects.create(user=customer)
+        product = Product.objects.create(title="Tea cup", price="100")
+        cartitem = CartItem(cart=cart, product=product)
+        self.assertEqual(cartitem.get_absolute_url(), f"/cart/1/item/{cartitem.id}/")
