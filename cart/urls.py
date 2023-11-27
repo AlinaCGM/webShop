@@ -5,5 +5,6 @@ urlpatterns = [
     # Define your URL patterns here
     # For example:
     # path('cart/', views.cart_view, name='cart'),
-    path("<int:pk>", views.cart_view, name="cart-detail"),
+    # path("<int:pk>", views.cart_view, name="cart-detail"),
+    path("user/<int:pk>", views.cart_view, name="cart"),
 ]
