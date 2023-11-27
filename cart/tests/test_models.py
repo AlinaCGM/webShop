@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from cart.models import Cart, CartItem
 from product.models import Product
-from django.utils import timezone
+from datetime import date
 
 
 class CartModelTest(TestCase):
@@ -17,7 +17,8 @@ class CartModelTest(TestCase):
         customer = User.objects.get(id=1)
         cart = Cart.objects.create(user=customer)
         created_at = cart.created_at
-        self.assertEqual(created_at, timezone.now())
+        self.assertEqual(created_at, date.today())
+
 
 
 class CartItemModelTest(TestCase):
