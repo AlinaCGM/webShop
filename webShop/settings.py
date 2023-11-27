@@ -11,7 +11,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-USER_TEMPLATE_DIR = os.path.join(BASE_DIR, 'user/templates')
+USER_TEMPLATE_DIR = os.path.join(BASE_DIR, "user/templates")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -55,7 +55,7 @@ ROOT_URLCONF = "webShop.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "home", "templates"),USER_TEMPLATE_DIR],
+        "DIRS": [os.path.join(BASE_DIR, "home", "templates"), USER_TEMPLATE_DIR],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -104,5 +104,5 @@ USE_TZ = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-LOGIN_URL = '/user/login'
+LOGIN_URL = "/user/login"
 # AUTH_USER_MODEL = 'user.User_Model'
