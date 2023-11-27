@@ -6,6 +6,7 @@ from django.db import models
 from product.models import Product
 from django.contrib.auth.models import User
 from django.urls import reverse
+from datetime import date
 
 
 class Cart(models.Model):
@@ -14,7 +15,7 @@ class Cart(models.Model):
     # A User can only have one Cart and a Cart can only belong to one User
     # When the User referencing the Cart is deleted, the associated Cart will also be deleted
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True, null=False)
+    created_at = models.DateField(default=date.today(), null=False)
 
     def cart_total_price(self):
         pass
