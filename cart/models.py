@@ -28,8 +28,16 @@ class Cart(models.Model):
         return f"User: {self.user.id} cart"
 
 
+import uuid
+
+
 class CartItem(models.Model):
     """Model representing an item in a cart (an item in a cart can actually have its quantity increased by the user)"""
+
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+    )
 
     # A CartItem can have one and only one Cart (not 0 or many), but a Cart can have 0 or many CartItems
     # When the Cart referencing the CartItem is deleted, the associated CartItem will also be deleted
