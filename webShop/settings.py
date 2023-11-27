@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     "home.apps.BaseConfig",
     "order.apps.OrderConfig",
     "product.apps.ProductConfig",
-    # "user.apps.UserConfig",
+    "user.apps.UserConfig",
 ]
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
