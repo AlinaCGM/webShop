@@ -39,7 +39,7 @@ class User_Model(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True, blank=True)
-
+     
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
