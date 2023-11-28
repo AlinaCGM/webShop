@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# # Create your models here.
 
 # from user.models import User_Model
 from product.models import Product
@@ -23,12 +23,21 @@ class Cart(models.Model):
     def get_absolute_url(self):
         """Return the URL to access a particular cart instance"""
         return reverse("cart", args=[str(self.id)])
+<<<<<<< HEAD
 
 
     def __str__(self):
         return f"User: {self.user.id} cart"
 
 
+=======
+
+
+#     def __str__(self):
+#         return f"User: {self.user.id} cart"
+
+
+>>>>>>> 931f2cf (sm)
 import uuid
 
 

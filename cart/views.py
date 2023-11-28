@@ -24,4 +24,6 @@ def cart_item_detail(request, cart_pk, item_pk):
 
     context = {"product": product, "quantity": quantity}
 
+
     return render(request, "cart_item_detail.html", context=context)
+
