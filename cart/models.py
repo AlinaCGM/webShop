@@ -1,6 +1,6 @@
 from django.db import models
 
-# # Create your models here.
+# Create your models here.
 
 # from user.models import User_Model
 from product.models import Product
@@ -25,8 +25,8 @@ class Cart(models.Model):
         return reverse("cart", args=[str(self.id)])
 
 
-#     def __str__(self):
-#         return f"User: {self.user.id} cart"
+    def __str__(self):
+        return f"User: {self.user.id} cart"
 
 
 import uuid
