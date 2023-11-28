@@ -8,11 +8,21 @@
 </head>
 <body>
     {% block content %}
-    <h1 class="red-text mt-5">Cart</h1>
-    <ul>
-        <li>This cart belongs to: <strong>{{ cart_user }}</strong></li>
-        <li>It is 1 cart out of a total of <strong>{{ num_carts_total }}</strong></li>
-    </ul>
+    <section class="container">
+        <h2>Cart</h2>
+        <p>Hi <strong>{{ cart.user.username }}</strong> ({{ cart.user.email }})!</p>
+        <p>These are the products in your cart:</p>
+        <ul>
+            {% for item in cart_item_list %}
+            <li>
+                <img src="{{ item.product.image.url }}" class="img-fluid" alt="{{ item.product.alt }}"> {# alt field doesn't exist yet #}
+                {{ item.product.title }} - Quantity: <strong>[{{ item.quantity }}]</strong> Price: {{ item.quantity }} x {{ item.product.price }} = {{ item.total_price }}
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
     {% endblock %}
+
+
 </body>
 </html>
