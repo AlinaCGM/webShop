@@ -1,6 +1,11 @@
 # Python *
+<<<<<<< HEAD
  
 __pycache__/
+=======
+*.pyc 
+*__pycache__/
+>>>>>>> 5d603eb (pyc added to main)
 *.pyo
 *.pyd
 
