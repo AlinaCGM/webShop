@@ -1,4 +1,7 @@
+{% extends "home/base.html" %}
 {% load static %}
+{% block template %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,16 +10,16 @@
 
 </head>
 <body>
-    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-        <div class="jumbotron bg-light text-dark" style="padding-top: 100px; width: 600px; height: 400px;">
+    <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+        <div class="jumbotron bg-light text-dark" style="padding-top: 20px; width: 500px; height: 380px;">
         <h1 class="display-6">Login</h1>
         
         <form action="{% url 'user:user_login' %}" method="post" class="form">
             {% csrf_token %}
     
             <div class="form-group">
-                <label for="{{ form.username.id_for_label }}" class="form-control-label">Username:</label>
-                <input type="text" name="username" class="form-control" id="{{ form.username.id_for_label }}" placeholder="Enter username">
+                <label for="{{ form.email.id_for_label }}" class="form-control-label">Email address:</label>
+                <input type="text" name="email" class="form-control" id="{{ form.email.id_for_label }}" placeholder="Enter email">
             </div>
     
             <div class="form-group">
@@ -28,7 +31,8 @@
                 <div class="form-group">
                     <div class="d-grid gap-2 col-3 mx-auto">
                         <button class="btn btn-primary" type="submit">Log In</button>
-                        <button class="btn btn-primary" type="submit">Register</button>
+                        <a href="{% url 'user:registration' %}" class="btn btn-primary">Register</a>    
+                        <p>Not a user ?</p>                    
                       </div>
                 </div>
           
@@ -38,3 +42,4 @@
 </div>
 </body>
 </html>
+{% endblock %}

@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     "order.apps.OrderConfig",
     "product.apps.ProductConfig",
     "user.apps.UserConfig",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
@@ -104,5 +106,7 @@ USE_TZ = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-LOGIN_URL = '/user/login'
-# AUTH_USER_MODEL = 'user.User_Model'
+LOGIN_URL = "/user/login"
+AUTH_USER_MODEL = 'user.User_Model'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
