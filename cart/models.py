@@ -2,12 +2,11 @@ from django.db import models
 
 # # Create your models here.
 
-from user.models import User_Model
+# from user.models import User_Model
 from product.models import Product
+from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import date
-from django.utils import timezone
-
 
 
 class Cart(models.Model):
@@ -15,17 +14,16 @@ class Cart(models.Model):
 
     # A User can only have one Cart and a Cart can only belong to one User
     # When the User referencing the Cart is deleted, the associated Cart will also be deleted
-    user = models.OneToOneField(User_Model, on_delete=models.CASCADE)
-    # created_at = models.DateField(default=date.today(), null=False)
-    created_at = models.DateTimeField(default=timezone.now)
-    
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    created_at = models.DateField(default=date.today(), null=False)
 
-    def cart_total_price(self):
-        pass
+    #     def cart_total_price(self):
+    #         pass
 
     def get_absolute_url(self):
         """Return the URL to access a particular cart instance"""
         return reverse("cart", args=[str(self.id)])
+
 
     def __str__(self):
         return f"User: {self.user.id} cart"
@@ -51,8 +49,8 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     added_to_cart = models.DateTimeField(auto_now_add=True, null=False)
 
-    class Meta:
-        ordering = ["added_to_cart"]
+    #     class Meta:
+    #         ordering = ["added_to_cart"]
 
     def total_price(self):
         return self.quantity * self.product.price

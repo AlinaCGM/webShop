@@ -1,6 +1,6 @@
 import uuid
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, Group, Permission
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 class Address(models.Model):
     street = models.CharField(max_length=100, null=False)
@@ -31,33 +31,14 @@ class UserManager(BaseUserManager):
 
 class User_Model(AbstractBaseUser, PermissionsMixin):
     user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, default='email@email.com')
     username = models.CharField(max_length=50, unique=True)
     first_name = models.CharField(max_length=50, default='')
     last_name = models.CharField(max_length=50, default='')
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(default='1900-01-01')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True, blank=True)
-
-    # objects = UserManager()
-
-    # USERNAME_FIELD = 'email'
-    # REQUIRED_FIELDS = ['username']
-
-    # def __str__(self):
-    #     return self.email
-     # Overriding the groups and user_permissions fields
-    groups = models.ManyToManyField(
-        Group,
-        related_name="custom_user_groups",
-        blank=True
-    )
-    user_permissions = models.ManyToManyField(
-        Permission,
-        related_name="custom_user_permissions",
-        blank=True
-    )
 
     objects = UserManager()
 
