@@ -17,6 +17,7 @@ class Cart(models.Model):
     created_at = models.DateField(default=date.today(), null=False)
 
     def cart_total_price(self):
+        # FIX colculate this here or in the template based on total_price of each item
         pass
 
     def get_absolute_url(self):
@@ -24,7 +25,7 @@ class Cart(models.Model):
         return reverse("cart", args=[str(self.id)])
 
     def __str__(self):
-        return f"User: {self.user.id} cart"
+        return f"Customer: {self.user.email} (id: {self.user.user_id})"
 
 
 import uuid
