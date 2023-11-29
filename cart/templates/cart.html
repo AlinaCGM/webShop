@@ -15,6 +15,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
+                        {# TODO all of this needs to be a form #}
                         <form action="">
                             <input type="number" value="{{ item.quantity }}">
                         </form>
@@ -29,7 +30,7 @@
             </li>
             {% endfor %}
         </ol>
-        {# TODO Add carts total price #}
+        {# TODO Add carts total price. Calculate here by cart_item_list #}
     </section>
     {% endblock %}
 </body>
