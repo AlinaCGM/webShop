@@ -5,15 +5,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('cart', '0002_alter_cart_created_at_alter_cartitem_id'),
+        ("cart", "0002_alter_cart_created_at_alter_cartitem_id"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='cart',
-            name='created_at',
+            model_name="cart",
+            name="created_at",
             field=models.DateField(default=datetime.date(2023, 11, 28)),
         ),
     ]
