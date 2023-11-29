@@ -1,18 +1,36 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome to the WebShop</title>
-    {% comment %} <link rel="stylesheet" href="{% static 'home/styles.css' %}"> {% endcomment %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
-<body>
-    {% block content %}
-    <h1 class="red-text mt-5">Cart</h1>
-    <ul>
-        <li>This cart belongs to: <strong>{{ cart_user }}</strong></li>
-        <li>It is 1 cart out of a total of <strong>{{ num_carts_total }}</strong></li>
-    </ul>
+{% extends "home/base.html" %}
+
+    {% block template %}
+    <section class="container">
+        <h2>Cart</h2>
+        <p>Hi <strong>{{ cart.user.username }}</strong> ({{ cart.user.email }})!</p>
+        <p>These are the products in your cart:</p>
+        <ol class="list-group list-group-numbered">
+            {% for item in cart_item_list %}
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <img src="{{ item.product.image.url }}" class="ms-4" width="100px" alt="{{ item.product.alt }}"> {# alt field doesn't exist yet #}
+                <div class="ms-4 me-auto">
+                    <div class="fw-bold">{{ item.product.title }}</div>
+                    ${{ item.product.price }}
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <form action="">
+                            <input type="number" value="{{ item.quantity }}">
+                        </form>
+                    </div>
+                    <div class="col-3">
+                        <div><strong>Total:</strong> ${{ item.total_price }}</div>
+                    </div>
+                    <div class="col-3">
+                        <button>Remove</button>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ol>
+        {# TODO Add carts total price #}
+    </section>
     {% endblock %}
 </body>
 </html>

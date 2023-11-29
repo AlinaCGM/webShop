@@ -10,12 +10,13 @@
             border: 1px solid #ccc;
             padding: 10px;
             margin: 10px;
-            width: 200px;
+            width: 400px;
+            height:400px;
         }
 
         .product-card img {
-            max-width: 100%;
-            height: auto;
+            width: auto;
+            height: 200px;
         }
 
         .add-to-cart-btn {
@@ -32,7 +33,7 @@
         <h2 class="mt-5">Product List</h2>
         <div class="row">
             {% for product in products %}
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4 ">
                     <div class="product-card text-center">
                         <img src="{{ product.image.url }}" alt="Product Title">
                         <h3 class="mt-2">{{ product.title }}</h3>
