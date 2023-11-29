@@ -6,6 +6,7 @@ from user.models import User_Model
 from product.models import Product
 from django.urls import reverse
 from datetime import date
+from django.utils import timezone
 
 
 class Cart(models.Model):
