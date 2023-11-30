@@ -2,18 +2,18 @@ from django.shortcuts import render
 
 # Create your views here.
 
+from django.views.generic import DetailView
 from .models import Cart, CartItem
 from django.shortcuts import get_object_or_404
 
 
-def cart(request, pk):
-    cart = get_object_or_404(Cart, pk=pk)
-    cart_user = cart.user
-    num_carts_total = Cart.objects.all().count()
+class CartDetailView(DetailView):
+    model = Cart
+    template_name = "cart.html"
 
-    context = {"cart_user": cart_user, "num_carts_total": num_carts_total}
 
-    return render(request, "cart.html", context=context)
+# TODO Use the built in UpdateView for quantity form
+# plus DeleteView for remove button
 
 
 def cart_item_detail(request, cart_pk, item_pk):

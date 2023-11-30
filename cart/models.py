@@ -6,7 +6,7 @@ from django.db import models
 from product.models import Product
 from django.contrib.auth.models import User
 from django.urls import reverse
-from datetime import date
+from django.utils import timezone
 
 
 class Cart(models.Model):
@@ -14,19 +14,19 @@ class Cart(models.Model):
 
     # A User can only have one Cart and a Cart can only belong to one User
     # When the User referencing the Cart is deleted, the associated Cart will also be deleted
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    created_at = models.DateField(default=date.today(), null=False)
+    user = models.OneToOneField(User_Model, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now, null=False)
 
-    #     def cart_total_price(self):
-    #         pass
+    def cart_total_price(self):
+        # FIX colculate this here or in the template based on total_price of each item
+        pass
 
     def get_absolute_url(self):
         """Return the URL to access a particular cart instance"""
         return reverse("cart", args=[str(self.id)])
 
-
     def __str__(self):
-        return f"User: {self.user.id} cart"
+        return f"Customer: {self.user.email} (id: {self.user.user_id})"
 
 
 import uuid
@@ -46,8 +46,8 @@ class CartItem(models.Model):
 
     # A CartItem can have one and only one Product, but a Product can have 0 or many CartItems
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-    added_to_cart = models.DateTimeField(auto_now_add=True, null=False)
+    quantity = models.IntegerField(default=1)
+    added_to_cart = models.DateTimeField(default=timezone.now, null=False)
 
     #     class Meta:
     #         ordering = ["added_to_cart"]

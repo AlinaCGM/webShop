@@ -1,6 +1,17 @@
 import uuid
 from django.db import models
+<<<<<<< HEAD
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+    Group,
+    Permission,
+)
+
+=======
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+>>>>>>> 7e8965089d5b9fc2f96e60ac62fdd08a9ec4538f
 
 class Address(models.Model):
     street = models.CharField(max_length=100, null=False)
@@ -10,24 +21,26 @@ class Address(models.Model):
     zip_code = models.CharField(max_length=10, null=False)
 
     def __str__(self):
-        return f'{self.city}-{self.zip_code}-{self.apartment_number}'
+        return f"{self.city}-{self.zip_code}-{self.apartment_number}"
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None, **extra_fields):
         if not email:
-            raise ValueError('The Email field must be set')
+            raise ValueError("The Email field must be set")
         email = self.normalize_email(email)
         user = self.model(email=email, username=username, **extra_fields)
-        user.set_password(password) 
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
     def create_superuser(self, email, username, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_active', True)
-        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_active", True)
+        extra_fields.setdefault("is_superuser", True)
 
         return self.create_user(email, username, password, **extra_fields)
+
 
 class User_Model(AbstractBaseUser, PermissionsMixin):
     user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -38,12 +51,14 @@ class User_Model(AbstractBaseUser, PermissionsMixin):
     date_of_birth = models.DateField(default='1900-01-01')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True, blank=True)
+    address = models.OneToOneField(
+        Address, on_delete=models.CASCADE, null=True, blank=True
+    )
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
         return self.email
