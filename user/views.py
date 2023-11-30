@@ -12,25 +12,25 @@ from user.forms import UserRegistrationForm, AddressRegistrationForm, UserProfil
 
 
 def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
 
         user = authenticate(username=username, password=password)
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(reverse('user:profile'))
+                return HttpResponseRedirect(reverse("user:profile"))
             else:
-                return HttpResponse('Account not active')
+                return HttpResponse("Account not active")
 
         else:
-            print('Someone tried to login and failed')
-            print('Username: {} and password {}'.format(username, password))
-            return HttpResponse('Invalid login details supplied')
+            print("Someone tried to login and failed")
+            print("Username: {} and password {}".format(username, password))
+            return HttpResponse("Invalid login details supplied")
 
     else:
-        return render(request, 'login.html', {})
+        return render(request, "login.html", {})
 
 
 def registration(request):
@@ -55,9 +55,15 @@ def registration(request):
     user_registration_form = UserRegistrationForm()
     address_registration_form = AddressRegistrationForm()
 
-    return render(request, 'registration.html', {'user_form': user_registration_form,
-                                                 'address_form': address_registration_form,
-                                                 'registered': registered})
+    return render(
+        request,
+        "registration.html",
+        {
+            "user_form": user_registration_form,
+            "address_form":  address_registration_form,
+       "registered": registered,
+        },
+    )
 
 
 @login_required
