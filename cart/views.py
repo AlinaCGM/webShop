@@ -11,18 +11,9 @@ class CartDetailView(DetailView):
     model = Cart
     template_name = "cart.html"
 
-    """Override get_context_data to get information about CartItems aswell"""
-
-    def get_context_data(self, **kwargs):
-        # First call the base/default implementation to get a context
-        context = super().get_context_data(**kwargs)
-        # Get/Add a QuerySet of all cart items
-        context["cart_item_list"] = CartItem.objects.filter(cart=self.object)
-        return context
-
 
 # TODO Use the built in UpdateView for quantity form
-# plus delete for remove button
+# plus DeleteView for remove button
 
 
 def cart_item_detail(request, cart_pk, item_pk):

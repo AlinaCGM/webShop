@@ -6,7 +6,7 @@
         <p>Hi <strong>{{ cart.user.username }}</strong> ({{ cart.user.email }})!</p>
         <p>These are the products in your cart:</p>
         <ol class="list-group list-group-numbered">
-            {% for item in cart_item_list %}
+            {% for item in cart.cartitem_set.all %}
             <li class="list-group-item d-flex justify-content-between align-items-start">
                 <img src="{{ item.product.image.url }}" class="ms-4" width="100px" alt="{{ item.product.alt }}"> {# alt field doesn't exist yet #}
                 <div class="ms-4 me-auto">
@@ -15,8 +15,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        {# TODO all of this needs to be a form #}
-                        <form action="">
+                        {# TODO form here to update quantity #}
+                        <form action="" method="post">
                             <input type="number" value="{{ item.quantity }}">
                         </form>
                     </div>
@@ -24,13 +24,14 @@
                         <div><strong>Total:</strong> ${{ item.total_price }}</div>
                     </div>
                     <div class="col-3">
+                        {# TODO form here to remove #}
                         <button>Remove</button>
                     </div>
                 </div>
             </li>
             {% endfor %}
         </ol>
-        {# TODO Add carts total price. Calculate here by cart_item_list #}
+        {# TODO Add carts total price. Calculate here by cart.cartitem_set.all #}
     </section>
     {% endblock %}
 </body>
