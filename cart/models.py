@@ -2,8 +2,9 @@ from django.db import models
 
 # # Create your models here.
 
-from user.models import User_Model
+# from user.models import User_Model
 from product.models import Product
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 
@@ -48,8 +49,8 @@ class CartItem(models.Model):
     quantity = models.IntegerField(default=1)
     added_to_cart = models.DateTimeField(default=timezone.now, null=False)
 
-    class Meta:
-        ordering = ["added_to_cart"]
+    #     class Meta:
+    #         ordering = ["added_to_cart"]
 
     def total_price(self):
         return self.quantity * self.product.price
