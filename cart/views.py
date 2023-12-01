@@ -1,10 +1,8 @@
-from django.shortcuts import render
-
-# Create your views here.
-
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView
 from .models import Cart, CartItem
-from django.shortcuts import get_object_or_404
+from product.models import Product
+from django.contrib import messages
 
 
 class CartDetailView(DetailView):
@@ -16,12 +14,22 @@ class CartDetailView(DetailView):
 # plus DeleteView for remove button
 
 
-def cart_item_detail(request, cart_pk, item_pk):
-    cart_item = get_object_or_404(CartItem, pk=item_pk, cart_id=cart_pk)
+def cart_add(request, product_pk):
+    product = get_object_or_404(Product, pk=product_pk)
 
-    product = cart_item.product
-    quantity = cart_item.quantity
+    # Get the user_id of the user adding to their cart
+    user_id = request.user.pk
+    cart = get_object_or_404(Cart, user__pk=user_id)
 
-    context = {"product": product, "quantity": quantity}
+    # Check if cart_item of this product already exists in the cart
+    cart_item = CartItem.objects.filter(cart=cart, product=product).first()
 
-    return render(request, "cart_item_detail.html", context=context)
+    if cart_item:
+        cart_item.quantity += 1
+        cart_item.save()
+    else:
+        cart_item = CartItem.objects.create(cart=cart, product=product)
+
+    messages.success(request, f"{product.title} successfully added to cart.")
+
+    return redirect("product_list")

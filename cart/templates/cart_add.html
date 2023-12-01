@@ -1,0 +1,6 @@
+{% block content %}    
+    <form method="post" action="{% url 'add-to-cart' product.id %}">
+        {% csrf_token %}
+        <button class="add-to-cart-btn">Add to Cart</button>
+    </form>
+{% endblock %}

@@ -5,6 +5,28 @@
     <title>Welcome to the WebShop</title>
     <link rel="stylesheet" href="{% static 'home/styles.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+      .product-card {
+          border: 1px solid #ccc;
+          padding: 10px;
+          margin: 10px;
+          width: 400px;
+          height:400px;
+      }
+
+      .product-card img {
+          width: auto;
+          height: 200px;
+      }
+
+      .add-to-cart-btn {
+          background-color: grey; /* Bootstrap success color */
+          color: #fff;
+          padding: 5px 10px;
+          border: none;
+          cursor: pointer;
+      }
+  </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -16,14 +38,17 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'product_list' %}">Products</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">User</a>
-              </li>             
+              </li>
+              <li class="nav-item">
+                {# Commented out because first, on user creation, a cart connected to that user has to be created<a class="nav-link" href="{% url 'cart' %}"><img src="{% static 'media/icons/cart-icon.svg' pk=request.user.cart.pk %}" alt="Cart icon"></a>#}
+                </li>
             </ul>
           </div>
           {% if user.is_authenticated %}
