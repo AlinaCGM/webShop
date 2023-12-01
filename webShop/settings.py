@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     "product.apps.ProductConfig",
     "user.apps.UserConfig",
     "crispy_forms",
-    "crispy_bootstrap5",
+    # "crispy_bootstrap5",
 ]
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
