@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView
 from .models import Cart, CartItem
 from product.models import Product
+from django.contrib import messages
 
 
 class CartDetailView(DetailView):
@@ -28,5 +29,7 @@ def cart_add(request, product_pk):
         cart_item.save()
     else:
         cart_item = CartItem.objects.create(cart=cart, product=product)
+
+    messages.success(request, f"{product.title} successfully added to cart.")
 
     return redirect("product_list")

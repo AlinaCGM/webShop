@@ -32,6 +32,14 @@
     <div class="container">
         <h2 class="mt-5">Product List</h2>
         <div class="row">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="text-success border border-success">
+                    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                </div>
+                {% endfor %}
+            {% endif %}
+
             {% for product in products %}
                 <div class="col-sm-6 col-md-4 ">
                     <div class="product-card text-center">
