@@ -1,5 +1,5 @@
-from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import DetailView
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import DetailView, UpdateView
 from .models import Cart, CartItem
 from product.models import Product
 from django.contrib import messages
@@ -33,3 +33,20 @@ def cart_add(request, product_pk):
     messages.success(request, f"{product.title} successfully added to cart.")
 
     return redirect("product_list")
+
+
+from django.urls import reverse_lazy
+
+
+class CartItemUpdateView(UpdateView):
+    model = CartItem
+    fields = ["quantity"]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["item"] = self.object
+        return context
+
+    def get_success_url(self):
+        cart_id = self.object.cart.id
+        return reverse_lazy("cart", kwargs={"pk": cart_id})

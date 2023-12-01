@@ -15,10 +15,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        {# TODO form here to update quantity #}
-                        <form action="" method="post">
-                            <input type="number" value="{{ item.quantity }}">
-                        </form>
+                        <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+                        {% include "cart/cartitem_form.html" %}
                     </div>
                     <div class="col-3">
                         <div><strong>Total:</strong> ${{ item.total_price }}</div>
