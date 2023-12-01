@@ -3,12 +3,12 @@ from django.urls import reverse
 from django.shortcuts import render, redirect, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import UserChangeForm
 from user.forms import UserRegistrationForm, AddressRegistrationForm, UserProfileForm, AddressForm
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from cart.models import Cart
 # Create your views here.
 
 
@@ -47,7 +47,8 @@ def registration(request):
         user.address = address
         user.set_password(user.password)
         user.save()
-
+        cart = Cart.objects.create(user=user)
+        
         registered = True
 
     else:

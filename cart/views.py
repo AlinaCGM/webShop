@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
 from .models import Cart, CartItem
 from product.models import Product
@@ -13,7 +14,7 @@ class CartDetailView(DetailView):
 # TODO Use the built in UpdateView for quantity form
 # plus DeleteView for remove button
 
-
+@login_required
 def cart_add(request, product_pk):
     product = get_object_or_404(Product, pk=product_pk)
 
