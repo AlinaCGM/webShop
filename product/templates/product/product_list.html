@@ -39,7 +39,7 @@
                         <h3 class="mt-2">{{ product.title }}</h3>
                         <p>{{ product.description }}</p>
                         <p class="fw-bold">Price: ${{ product.price }}</p>
-                        {% include "cart_add.html" %}
+                        {% include "cart_add.html" with product_id=product.id %}
                     </div>
                 </div>
             {% endfor %}

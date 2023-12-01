@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView
 from .models import Cart, CartItem
 from product.models import Product
@@ -29,15 +29,4 @@ def cart_add(request, product_pk):
     else:
         cart_item = CartItem.objects.create(cart=cart, product=product)
 
-    return render(
-        request, "product/product_list.html", context={"cart_item": cart_item}
-    )
-
-
-def cart_item_detail(request, cart_pk, item_pk):
-    product = cart_item.product
-    quantity = cart_item.quantity
-
-    context = {"product": product, "quantity": quantity}
-
-    return render(request, "cart_item_detail.html", context=context)
+    return redirect("product_list")
