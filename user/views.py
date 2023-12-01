@@ -6,9 +6,15 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import UserChangeForm
-from user.forms import UserRegistrationForm, AddressRegistrationForm, UserProfileForm, AddressForm
+from user.forms import (
+    UserRegistrationForm,
+    AddressRegistrationForm,
+    UserProfileForm,
+    AddressForm,
+)
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+
 # Create your views here.
 
 
@@ -61,28 +67,31 @@ def registration(request):
         "registration.html",
         {
             "user_form": user_registration_form,
-            "address_form":  address_registration_form,
-       "registered": registered,
+            "address_form": address_registration_form,
+            "registered": registered,
         },
     )
 
 
 @login_required
 def profile(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         address_form = AddressForm(request.POST, instance=request.user.address)
 
         if address_form.is_valid():
-            address_form.save()           
+            address_form.save()
 
-            messages.success(request, 'Your address successfully updated.')
-            return redirect('user:profile')
+            messages.success(request, "Your address successfully updated.")
+            return redirect("user:profile")
     else:
         user_form = UserProfileForm(instance=request.user)
         address_form = AddressForm(instance=request.user.address)
 
-    return render(request, 'profile.html', {'user_form': user_form, 'address_form': address_form})
+    return render(
+        request, "profile.html", {"user_form": user_form, "address_form": address_form}
+    )
+
 
 def user_logout(request):
     logout(request)
-    return redirect('user:user_login')
+    return redirect("user:user_login")
