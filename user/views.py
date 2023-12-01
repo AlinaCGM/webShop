@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import UserChangeForm
 from user.forms import UserRegistrationForm, AddressRegistrationForm, UserProfileForm, AddressForm
-
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 # Create your views here.
 
 
@@ -81,3 +82,7 @@ def profile(request):
         address_form = AddressForm(instance=request.user.address)
 
     return render(request, 'profile.html', {'user_form': user_form, 'address_form': address_form})
+
+def user_logout(request):
+    logout(request)
+    return redirect('user:user_login')
