@@ -47,7 +47,7 @@
                 <a class="nav-link" href="#">User</a>
               </li>
               <li class="nav-item">
-                {#Commented out because first, on user creation, a cart connected to that user has to be created<a class="nav-link" href="{% url 'cart' pk=request.user.cart.pk %}"><img src="{% static 'media/icons/cart-icon.svg' %}" alt="Cart icon"></a>#}
+                <a class="nav-link" href="{% url 'cart' pk=request.user.cart.pk %}"><img src="{% static 'media/icons/cart-icon.svg' %}" alt="Cart icon"></a>
                 </li>
             </ul>
           </div>
