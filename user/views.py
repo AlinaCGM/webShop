@@ -47,8 +47,8 @@ def registration(request):
         user.address = address
         user.set_password(user.password)
         user.save()
-        cart = Cart.objects.create(user=user)
-        
+       
+        cart = Cart.objects.create(user=user)        
         registered = True
 
     else:
