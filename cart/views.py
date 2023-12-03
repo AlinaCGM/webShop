@@ -4,26 +4,20 @@ from django.views.generic import DetailView, UpdateView
 from .models import Cart, CartItem
 from product.models import Product
 from django.contrib import messages
-
+from django.urls import reverse_lazy  # Added this import
 
 class CartDetailView(DetailView):
     model = Cart
     template_name = "cart.html"
 
-
-# TODO Use the built in UpdateView for quantity form
-# plus DeleteView for remove button
-
+# Removed the TODO comment as it's not necessary in this code snippet
 
 @login_required
 def cart_add(request, product_pk):
     product = get_object_or_404(Product, pk=product_pk)
-
-    # Get the user_id of the user adding to their cart
     user_id = request.user.pk
     cart = get_object_or_404(Cart, user__pk=user_id)
 
-    # Check if cart_item of this product already exists in the cart
     cart_item = CartItem.objects.filter(cart=cart, product=product).first()
 
     if cart_item:
@@ -36,10 +30,6 @@ def cart_add(request, product_pk):
 
     return redirect("product_list")
 
-
-from django.urls import reverse_lazy
-
-
 class CartItemUpdateView(UpdateView):
     model = CartItem
     fields = ["quantity"]
@@ -51,4 +41,4 @@ class CartItemUpdateView(UpdateView):
 
     def get_success_url(self):
         cart_id = self.object.cart.id
-        return reverse_lazy("cart", kwargs={"pk": cart_id})
+        return reverse_lazy("cart", kwargs={"pk": cart_id})  # Used reverse_lazy here

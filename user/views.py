@@ -14,6 +14,7 @@ from user.forms import (
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from cart.models import Cart
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -22,7 +23,8 @@ def user_login(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
-
+        users = User.objects.all() 
+        
         user = authenticate(username=username, password=password)
         if user:
             if user.is_active:
